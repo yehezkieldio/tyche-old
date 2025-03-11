@@ -1,5 +1,5 @@
 import { ConfigService } from "@nestjs/config";
-import { drizzle } from "drizzle-orm/postgres-js";
+import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./database.schema";
 
@@ -14,7 +14,7 @@ export const drizzleProvider = [
             if (!url) throw new Error("DATABASE_URL is not defined");
 
             const queryClient = postgres(url);
-            return drizzle(queryClient, { schema });
+            return drizzle(queryClient, { schema }) as PostgresJsDatabase<typeof schema>;
         },
     },
 ];
