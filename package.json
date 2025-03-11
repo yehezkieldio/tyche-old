@@ -16,7 +16,10 @@
         "db:push": "bun --env-file=.env drizzle-kit push",
         "db:studio": "bun --env-file=.env drizzle-kit studio",
         "db:generate": "bun --env-file=.env drizzle-kit generate",
-        "db:migrate": "bun --env-file=.env drizzle-kit migrate"
+        "db:migrate": "bun --env-file=.env drizzle-kit migrate",
+        "compose:dev:up": "docker compose -f docker-compose.yml --profile development up -d",
+        "compose:dev:down": "docker compose -f docker-compose.yml --profile development down",
+        "compose:dev:logs": "docker compose -f docker-compose.yml --profile development logs"
     },
     "dependencies": {
         "@nestjs/common": "^11.0.1",
