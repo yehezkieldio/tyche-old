@@ -1,5 +1,6 @@
 import { randomUUIDv7 } from "bun";
-import { decimal, integer, jsonb, pgEnum, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
+import { eq, sql } from "drizzle-orm";
+import { decimal, integer, jsonb, pgEnum, pgMaterializedView, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const accountStatus = pgEnum("account_status", ["ACTIVE", "INACTIVE", "SUSPENDED", "CLOSED"]);
 
@@ -41,6 +42,41 @@ export const transactions = pgTable("transactions", {
     createdAt: varchar("created_at", { length: 50 }).notNull().default(new Date().toISOString()),
     updatedAt: varchar("updated_at", { length: 50 }).notNull().default(new Date().toISOString()),
     deletedAt: varchar("deleted_at", { length: 50 }),
+});
+
+export const transactionHistory = pgMaterializedView("transaction_history").as((qb) => {
+    return qb
+        .select({
+            transactionId: transactions.id,
+            accountId: transactions.accountId,
+            type: transactions.type,
+            amount: transactions.amount,
+            currency: transactions.currency,
+            status: transactions.status,
+            createdAt: transactions.createdAt,
+        })
+        .from(transactions);
+});
+
+export const accountSummary = pgMaterializedView("account_summary").as((qb) => {
+    return qb
+        .select({
+            accountId: accounts.id,
+            ownerId: accounts.ownerId,
+            currency: accounts.currency,
+            balance: sql<number>`COALESCE(SUM(
+          CASE
+            WHEN ${transactions.type} = 'DEPOSIT' THEN ${transactions.amount}
+            WHEN ${transactions.type} = 'WITHDRAWAL' THEN -${transactions.amount}
+            ELSE 0
+          END
+        ), 0)`.as("balance"),
+            status: accounts.status,
+            createdAt: accounts.createdAt,
+        })
+        .from(accounts)
+        .leftJoin(transactions, eq(accounts.id, transactions.accountId))
+        .groupBy(accounts.id, accounts.ownerId, accounts.currency, accounts.status, accounts.createdAt);
 });
 
 /**

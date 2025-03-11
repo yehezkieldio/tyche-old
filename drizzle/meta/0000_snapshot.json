@@ -1,5 +1,5 @@
 {
-  "id": "0e1cbb93-4a46-40c4-a748-51153669ea1f",
+  "id": "f967b461-ef61-41f4-9fcb-27907b0bf0d6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -46,14 +46,14 @@
           "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'2025-03-11T08:12:14.603Z'"
+          "default": "'2025-03-11T09:08:27.913Z'"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'2025-03-11T08:12:14.603Z'"
+          "default": "'2025-03-11T09:08:27.913Z'"
         },
         "deleted_at": {
           "name": "deleted_at",
@@ -64,6 +64,286 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.event_store": {
+      "name": "event_store",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "aggregate_id": {
+          "name": "aggregate_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "aggregate_type": {
+          "name": "aggregate_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "event_type": {
+          "name": "event_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "event_data": {
+          "name": "event_data",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event_date": {
+          "name": "event_date",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.920Z'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.920Z'"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.920Z'"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "event_store_aggregate_id_accounts_id_fk": {
+          "name": "event_store_aggregate_id_accounts_id_fk",
+          "tableFrom": "event_store",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "aggregate_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.snapshots": {
+      "name": "snapshots",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "aggregate_id": {
+          "name": "aggregate_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "aggregate_type": {
+          "name": "aggregate_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_date": {
+          "name": "snapshot_date",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.920Z'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.921Z'"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.921Z'"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "snapshots_aggregate_id_accounts_id_fk": {
+          "name": "snapshots_aggregate_id_accounts_id_fk",
+          "tableFrom": "snapshots",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "aggregate_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.transactions": {
+      "name": "transactions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "transaction_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency": {
+          "name": "currency",
+          "type": "varchar(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'USD'"
+        },
+        "status": {
+          "name": "status",
+          "type": "transaction_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'PENDING'"
+        },
+        "transaction_date": {
+          "name": "transaction_date",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.914Z'"
+        },
+        "notes": {
+          "name": "notes",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.914Z'"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.914Z'"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "transactions_account_id_accounts_id_fk": {
+          "name": "transactions_account_id_accounts_id_fk",
+          "tableFrom": "transactions",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -81,13 +361,131 @@
         "SUSPENDED",
         "CLOSED"
       ]
+    },
+    "public.transaction_status": {
+      "name": "transaction_status",
+      "schema": "public",
+      "values": [
+        "PENDING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "public.transaction_type": {
+      "name": "transaction_type",
+      "schema": "public",
+      "values": [
+        "DEPOSIT",
+        "WITHDRAWAL",
+        "TRANSFER"
+      ]
     }
   },
   "schemas": {},
   "sequences": {},
   "roles": {},
   "policies": {},
-  "views": {},
+  "views": {
+    "public.account_summary": {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "currency": {
+          "name": "currency",
+          "type": "varchar(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'USD'"
+        },
+        "status": {
+          "name": "status",
+          "type": "account_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'ACTIVE'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.913Z'"
+        }
+      },
+      "definition": "select \"accounts\".\"id\", \"accounts\".\"owner_id\", \"accounts\".\"currency\", COALESCE(SUM(\n          CASE\n            WHEN \"transactions\".\"type\" = 'DEPOSIT' THEN \"transactions\".\"amount\"\n            WHEN \"transactions\".\"type\" = 'WITHDRAWAL' THEN -\"transactions\".\"amount\"\n            ELSE 0\n          END\n        ), 0) as \"balance\", \"accounts\".\"status\", \"accounts\".\"created_at\" from \"accounts\" left join \"transactions\" on \"accounts\".\"id\" = \"transactions\".\"account_id\" group by \"accounts\".\"id\", \"accounts\".\"owner_id\", \"accounts\".\"currency\", \"accounts\".\"status\", \"accounts\".\"created_at\"",
+      "name": "account_summary",
+      "schema": "public",
+      "isExisting": false,
+      "materialized": true
+    },
+    "public.transaction_history": {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "transaction_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency": {
+          "name": "currency",
+          "type": "varchar(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'USD'"
+        },
+        "status": {
+          "name": "status",
+          "type": "transaction_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'PENDING'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'2025-03-11T09:08:27.914Z'"
+        }
+      },
+      "definition": "select \"id\", \"account_id\", \"type\", \"amount\", \"currency\", \"status\", \"created_at\" from \"transactions\"",
+      "name": "transaction_history",
+      "schema": "public",
+      "isExisting": false,
+      "materialized": true
+    }
+  },
   "_meta": {
     "columns": {},
     "schemas": {},

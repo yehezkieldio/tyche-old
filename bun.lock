@@ -7,8 +7,10 @@
         "@nestjs/common": "^11.0.1",
         "@nestjs/config": "^4.0.1",
         "@nestjs/core": "^11.0.1",
+        "@nestjs/microservices": "^11.0.11",
         "@nestjs/platform-express": "^11.0.1",
         "drizzle-orm": "^0.40.0",
+        "kafkajs": "^2.2.4",
         "postgres": "^3.4.5",
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.1",
@@ -231,6 +233,8 @@
     "@nestjs/config": ["@nestjs/config@4.0.1", "", { "dependencies": { "dotenv": "16.4.7", "dotenv-expand": "12.0.1", "lodash": "4.17.21" }, "peerDependencies": { "@nestjs/common": "^10.0.0 || ^11.0.0", "rxjs": "^7.1.0" } }, "sha512-0hr6lKS//Wf8A6VcV69ts8uD0fke6jtmmmXSxzvwAzOM/HEXEKYEp21nRU+cpYxlYqm7Khb0oTOoVuDGk+AWUw=="],
 
     "@nestjs/core": ["@nestjs/core@11.0.11", "", { "dependencies": { "@nuxt/opencollective": "0.4.1", "fast-safe-stringify": "2.1.1", "iterare": "1.2.1", "path-to-regexp": "8.2.0", "tslib": "2.8.1", "uid": "2.0.2" }, "peerDependencies": { "@nestjs/common": "^11.0.0", "@nestjs/microservices": "^11.0.0", "@nestjs/platform-express": "^11.0.0", "@nestjs/websockets": "^11.0.0", "reflect-metadata": "^0.1.12 || ^0.2.0", "rxjs": "^7.1.0" }, "optionalPeers": ["@nestjs/microservices", "@nestjs/platform-express", "@nestjs/websockets"] }, "sha512-jMH3jrjrPiaGrkQ5hANNcgDWN+j+hcM5GMQ3jSs4vOWNs3lmKHTVR11wJ9y5tTNnwKydzMogeju0VTUdfXDI5Q=="],
+
+    "@nestjs/microservices": ["@nestjs/microservices@11.0.11", "", { "dependencies": { "iterare": "1.2.1", "tslib": "2.8.1" }, "peerDependencies": { "@grpc/grpc-js": "*", "@nestjs/common": "^11.0.0", "@nestjs/core": "^11.0.0", "@nestjs/websockets": "^11.0.0", "amqp-connection-manager": "*", "amqplib": "*", "cache-manager": "*", "ioredis": "*", "kafkajs": "*", "mqtt": "*", "nats": "*", "reflect-metadata": "^0.1.12 || ^0.2.0", "rxjs": "^7.1.0" }, "optionalPeers": ["@grpc/grpc-js", "@nestjs/websockets", "amqp-connection-manager", "amqplib", "cache-manager", "ioredis", "kafkajs", "mqtt", "nats"] }, "sha512-vH7QY8kqvhbAIFY4+MpvzIiEk24boWGwdkhx1tvtXmKV3711fbswUqa3KMKu8u3aQ4BcQCjx4e/6l994Luru2A=="],
 
     "@nestjs/platform-express": ["@nestjs/platform-express@11.0.11", "", { "dependencies": { "cors": "2.8.5", "express": "5.0.1", "multer": "1.4.5-lts.1", "path-to-regexp": "8.2.0", "tslib": "2.8.1" }, "peerDependencies": { "@nestjs/common": "^11.0.0", "@nestjs/core": "^11.0.0" } }, "sha512-iv6nH66i/RuRQufg5UUboQ4jQX4NuuePrYQpHB3ueiEIhJm2yLhhNYM6Y2l/76y9woW2eckbiqbzmW/JajAgeQ=="],
 
@@ -807,6 +811,8 @@
     "jsonc-parser": ["jsonc-parser@3.3.1", "", {}, "sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ=="],
 
     "jsonfile": ["jsonfile@6.1.0", "", { "dependencies": { "universalify": "^2.0.0" }, "optionalDependencies": { "graceful-fs": "^4.1.6" } }, "sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ=="],
+
+    "kafkajs": ["kafkajs@2.2.4", "", {}, "sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA=="],
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
 

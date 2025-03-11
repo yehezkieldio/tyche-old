@@ -17,6 +17,7 @@
         "db:studio": "bun --bun --env-file=.env drizzle-kit studio",
         "db:generate": "bun --bun --env-file=.env drizzle-kit generate",
         "db:migrate": "bun --bun --env-file=.env drizzle-kit migrate",
+        "db:it": "docker exec -it tyche-postgres psql -U elizielx -d tyche",
         "compose:dev:up": "docker compose -f docker-compose.yml --profile development up -d",
         "compose:dev:down": "docker compose -f docker-compose.yml --profile development down",
         "compose:dev:logs": "docker compose -f docker-compose.yml --profile development logs",
@@ -31,8 +32,10 @@
         "@nestjs/common": "^11.0.1",
         "@nestjs/config": "^4.0.1",
         "@nestjs/core": "^11.0.1",
+        "@nestjs/microservices": "^11.0.11",
         "@nestjs/platform-express": "^11.0.1",
         "drizzle-orm": "^0.40.0",
+        "kafkajs": "^2.2.4",
         "postgres": "^3.4.5",
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.1"

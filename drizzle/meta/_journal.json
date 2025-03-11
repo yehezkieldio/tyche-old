@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1741680734622,
-      "tag": "0000_accounts",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1741681005663,
-      "tag": "0001_transactions",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1741681531370,
-      "tag": "0002_stores",
+      "when": 1741684107950,
+      "tag": "0000_salty_hiroim",
       "breakpoints": true
     }
   ]
