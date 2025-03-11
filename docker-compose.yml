@@ -63,12 +63,64 @@ services:
       - 8080:8080
     depends_on:
       - redpanda
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: tyche-prometheus
+    profiles: [observability]
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    networks:
+      - tyche-network
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: tyche-postgres-exporter
+    profiles: [observability]
+    environment:
+      DATA_SOURCE_NAME: "postgresql://elizielx:elizielx@postgres:5432/tyche?sslmode=disable"
+    ports:
+      - "9187:9187"
+    networks:
+      - tyche-network
+    depends_on:
+      - postgres
+  grafana:
+    image: grafana/grafana:latest
+    container_name: tyche-grafana
+    profiles: [observability]
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/overview.json
+    ports:
+      - "3000:3000"
+    networks:
+      - tyche-network
+    depends_on:
+      - prometheus
 
 volumes:
   postgres_data:
     name: tyche-postgres-data
   redpanda_data:
     name: tyche-redpanda-data
+  prometheus_data:
+    name: tyche-prometheus-data
+  grafana_data:
+    name: tyche-grafana-data
 
 networks:
   tyche-network:

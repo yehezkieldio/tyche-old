@@ -19,7 +19,13 @@
         "db:migrate": "bun --env-file=.env drizzle-kit migrate",
         "compose:dev:up": "docker compose -f docker-compose.yml --profile development up -d",
         "compose:dev:down": "docker compose -f docker-compose.yml --profile development down",
-        "compose:dev:logs": "docker compose -f docker-compose.yml --profile development logs"
+        "compose:dev:logs": "docker compose -f docker-compose.yml --profile development logs",
+        "compose:obs:up": "docker compose -f docker-compose.yml --profile observability up -d",
+        "compose:obs:down": "docker compose -f docker-compose.yml --profile observability down",
+        "compose:obs:logs": "docker compose -f docker-compose.yml --profile observability logs",
+        "compose:all:up": "docker compose -f docker-compose.yml up -d",
+        "compose:all:down": "docker compose -f docker-compose.yml down",
+        "compose:all:logs": "docker compose -f docker-compose.yml logs"
     },
     "dependencies": {
         "@nestjs/common": "^11.0.1",
